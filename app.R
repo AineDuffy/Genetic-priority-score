@@ -32,7 +32,7 @@ library(mailtoR)
 # on Gene tab select Gene  and then show all phenotypes for 
 #Drugfile<-fread('/Users/aineduffy/Documents/PhD/DrugGenetics/Dataset/Updated_dataset/Final_MI/Sept14/Allgenes_or4_prioritytable_miphenotypes_withdescription.txt.gz', data.table =F, quote="")
 
-Drugfile<-fread('/Users/AD/Documents/PhD/TIS/Allgenes_or4_prioritytable_miphenotypes_withdescription_sampled.txt', data.table =F, quote="")
+Drugfile<-fread('data/Allgenes_or4_prioritytable_miphenotypes_withdescription_sampled.txt', data.table =F, quote="")
 names(Drugfile)=c('Gene','Phecode_Integer','Sider_Indication','Sider_drug','Open_Targets_Indication','Open_Targets_Clinical_Phase',
                   'Open_Targets_drug','OMIM','Coloc_phenotype','Eqtl_phenotype','Coloc_tissue','HGMD','Genebass','Clinvar',
                   'Open_Targets_Genetics_Portal','Tissue_specific','Eqtl_tissue','OE','Genescore_sum','Number_of_predictors','Order','Percent',
