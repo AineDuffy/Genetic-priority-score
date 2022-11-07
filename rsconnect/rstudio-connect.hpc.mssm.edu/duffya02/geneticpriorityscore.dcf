@@ -1,0 +1,13 @@
+name: geneticpriorityscore
+title: geneticpriorityscore
+username: duffya02
+account: duffya02
+server: rstudio-connect.hpc.mssm.edu
+hostUrl: https://rstudio-connect.hpc.mssm.edu/__api__
+appId: 129
+bundleId: 433
+url: https://rstudio-connect.hpc.mssm.edu/geneticpriorityscore/
+when: 1667583545.77001
+lastSyncTime: 1667583545.77002
+asMultiple: FALSE
+asStatic: FALSE
