@@ -10,7 +10,7 @@
 
  <h2>Instructions</h2>
  
-<p>Users can use this website to explore associations by gene or by phenotype. All associations have a genetic priority score that corresponds to an OR >= 4. This OR cutoff can be refined to OR >= 5 or an OR >= 6 using the OR cutoff slider.</p>Cancel changes
+<p>Users can use this website to explore associations by gene or by phenotype. All associations have a genetic priority score that corresponds to an OR >= 4. This OR cutoff can be refined to OR >= 5 or an OR >= 6 using the OR cutoff slider.</p>
 <p>When the Gene tab is selected, users can search the priority scores for their gene of choice in the <b>‘Search Gene Target‘</b> tab. The user can choose to show all phenotype results or select a phenotype of interest in the <b>‘Choose Phenotypes:’</b> dropdown bar. When the phenotype tab is selected, users can select their phenotype of interest from the dropdown <b>‘Select phenotype:’</b> dropdown bar and further restrict by the gene target in the the <b>‘Choose Gene:’</b> dropdown bar.
 
 <p>Once a gene or phenotype is searched on the left side panel, this will generate a table of results in the", <b>Table</b> tab. Users can click on the <b>Evidence</b> tab to generate a heatmap with the genetic predictors on the x-axis and the associated gene/phenotypes on the y-axis. Genetic evidence for a predictor is colored in purple, and the user can hover over the cell to get the phenotype description from the phenotype data source. For genes/phenotypes with more than 100 rows of evidence, only the top 100 high-scored genes/phenotypes are shown.</p>
