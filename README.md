@@ -24,7 +24,7 @@
               
 <p><b>OMIM:</b> Mendelian genes from the Online Mendelian Inheritance in Man (OMIM)<sup>3</sup> database.</p>
     
-<p><b>HGMD:</b> Disease-causing and likely disease-causing genes for human inherited diseases from the human mutation database (HGMD) <sup>4</sup>.</p>
+<p><b>HGMD:</b> Disease-causing and likely disease-causing genes for human inherited diseases from the human mutation database (HGMD)<sup>4</sup>.</p>
 
 <p><b>EVA-ClinVar:</b> Clinically relevant genetic variants and diseases from ClinVar<sup>5</sup>. This evidence is obtained from the Open Target platform and was curated by European Variation Archive (EVA)<sup>6</sup>. ClinVar evidence was filtered on clinical significance: likely pathogenic', 'association', 'confers sensitivity', 'drug response', 'protective', and 'pathogenic' and the confidence of the submission was filtered on: 'criteria provided, single submitter', 'criteria provided, conflicting interpretations', 'criteria provided, multiple submitters, no conflicts', 'reviewed by expert panel', and 'practice guideline'.</p>
 
