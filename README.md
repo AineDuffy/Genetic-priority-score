@@ -33,7 +33,7 @@
 <p><b>Genebass:</b> Exome-based association statistics from the UK Biobank hosted by Genebass<sup>7</sup>. We restricted to traits labeled ‘ICD first occurrence’ and extracted genome-wide significant gene associations annotated as either predicted loss of function (pLOF) or missense.</p>
  <h3>Genome-wide association study phenotypes</h3>
 
-<p><b>Coloc phenotype:</b> Genes with a GWA phenotype driven by gene expression regulation through colocalization, using a posterior probability (PPH4)>0.8<sup>8,9</sup>. These phenotypes comprised 1,071 case-control phenotypes from phecodes10<sup>10</sup>, and 779 phenotypes from the UK Biobank Neale dataset (Round 1 - http://www.nealelab.is/uk-biobank).</p>
+<p><b>Coloc phenotype:</b> Genes with a GWA phenotype driven by gene expression regulation through colocalization, using a posterior probability (PPH4)>0.8<sup>8,9</sup>. These phenotypes comprised 1,071 case-control phenotypes from phecodes<sup>10</sup>, and 779 phenotypes from the UK Biobank Neale dataset (Round 1 - http://www.nealelab.is/uk-biobank).</p>
 
 <p><b>eQTL phenotype:</b> Genes with a GWA phenotype driven by gene expression regulation through shared variants. These phenotypes were obtained from the Pan-UK Biobank<sup>11</sup> and consisted of 484 ICD-10 traits, 729 phecodes, and 39 continuous traits that we had manually mapped to phecodes from the UK Biobank Neale.</p>
 
