@@ -22,33 +22,33 @@
 <h3>Clinical variants </h3>
               
               
-<p><b>OMIM:</b>Mendelian genes from the Online Mendelian Inheritance in Man (OMIM)<sup>3</sup> database.</p>
+<p><b>OMIM:</b> Mendelian genes from the Online Mendelian Inheritance in Man (OMIM)<sup>3</sup> database.</p>
     
-<p><b>HGMD:</b>Disease-causing and likely disease-causing genes for human inherited diseases from the human mutation database (HGMD) <sup>4</sup>.</p>
+<p><b>HGMD:</b> Disease-causing and likely disease-causing genes for human inherited diseases from the human mutation database (HGMD) <sup>4</sup>.</p>
 
-<p><b>EVA-ClinVar:</b>Clinically relevant genetic variants and diseases from ClinVar<sup>5</sup>. This evidence is obtained from the Open Target platform and was curated by European Variation Archive (EVA)<sup>6</sup>. ClinVar evidence was filtered on clinical significance: likely pathogenic', 'association', 'confers sensitivity', 'drug response', 'protective', and 'pathogenic' and the confidence of the submission was filtered on: 'criteria provided, single submitter', 'criteria provided, conflicting interpretations', 'criteria provided, multiple submitters, no conflicts', 'reviewed by expert panel', and 'practice guideline'.</p>
+<p><b>EVA-ClinVar:</b> Clinically relevant genetic variants and diseases from ClinVar<sup>5</sup>. This evidence is obtained from the Open Target platform and was curated by European Variation Archive (EVA)<sup>6</sup>. ClinVar evidence was filtered on clinical significance: likely pathogenic', 'association', 'confers sensitivity', 'drug response', 'protective', and 'pathogenic' and the confidence of the submission was filtered on: 'criteria provided, single submitter', 'criteria provided, conflicting interpretations', 'criteria provided, multiple submitters, no conflicts', 'reviewed by expert panel', and 'practice guideline'.</p>
 
 <h3>Coding variants</h3>
               
-<p><b>Genebass:</b>Exome-based association statistics from the UK Biobank hosted by Genebass<sup>7</sup>. We restricted to traits labeled ‘ICD first occurrence’ and extracted genome-wide significant gene associations annotated as either predicted loss of function (pLOF) or missense.</p>
+<p><b>Genebass:</b> Exome-based association statistics from the UK Biobank hosted by Genebass<sup>7</sup>. We restricted to traits labeled ‘ICD first occurrence’ and extracted genome-wide significant gene associations annotated as either predicted loss of function (pLOF) or missense.</p>
  <h3>Genome-wide association study phenotypes</h3>
 
-<p><b>Coloc phenotype:</b>Genes with a GWA phenotype driven by gene expression regulation through colocalization, using a posterior probability (PPH4)>0.8<sup>8,9</sup>. These phenotypes comprised 1,071 case-control phenotypes from phecodes10<sup>10</sup>, and 779 phenotypes from the UK Biobank Neale dataset (Round 1 - http://www.nealelab.is/uk-biobank).</p>
+<p><b>Coloc phenotype:</b> Genes with a GWA phenotype driven by gene expression regulation through colocalization, using a posterior probability (PPH4)>0.8<sup>8,9</sup>. These phenotypes comprised 1,071 case-control phenotypes from phecodes10<sup>10</sup>, and 779 phenotypes from the UK Biobank Neale dataset (Round 1 - http://www.nealelab.is/uk-biobank).</p>
 
-<p><b>eQTL phenotype:</b>Genes with a GWA phenotype driven by gene expression regulation through shared variants. These phenotypes were obtained from the Pan-UK Biobank<sup>11</sup> and consisted of 484 ICD-10 traits, 729 phecodes, and 39 continuous traits that we had manually mapped to phecodes from the UK Biobank Neale.</p>
+<p><b>eQTL phenotype:</b> Genes with a GWA phenotype driven by gene expression regulation through shared variants. These phenotypes were obtained from the Pan-UK Biobank<sup>11</sup> and consisted of 484 ICD-10 traits, 729 phecodes, and 39 continuous traits that we had manually mapped to phecodes from the UK Biobank Neale.</p>
 
-<p><b>Locus2gene:</b>Genes with a GWA phenotype identified by the Locus2Gene machine learning model from the Open Targets Genetics Portal which prioritizes likely causal genes at each GWAS locus by integrating fine-mapped associations with functional genomic features<sup>12</sup>.</p>
+<p><b>Locus2gene:</b> Genes with a GWA phenotype identified by the Locus2Gene machine learning model from the Open Targets Genetics Portal which prioritizes likely causal genes at each GWAS locus by integrating fine-mapped associations with functional genomic features<sup>12</sup>.</p>
 
 <h3>Tissue phenotypes </h3>
-<p><b>Coloc2 and eQTL tissue:</b>Genes with gene expression regulation in a given tissue that underlies a significant genome-wide association through a shared GWA and eQTL signal. We used eQTL summary statistics from GTEX v7 for coloc2 tissue and eQTL summary statistics from GTEX v8 for eQTL tissue. To link the coloc2 and eQTL tissues to phecodes, we used LD score regression applied to specifically expressed genes (LDSC-SEG)<sup>13</sup>, to identify phenotypic relevant tissues. This was applied for 54 tissues from GTEX V8 using GWAS summary statistics for 776 traits from the Neale GWAS resource and 1,112 traits from the Saige GWAS resource.</p>
+<p><b>Coloc2 and eQTL tissue:</b> Genes with gene expression regulation in a given tissue that underlies a significant genome-wide association through a shared GWA and eQTL signal. We used eQTL summary statistics from GTEX v7 for coloc2 tissue and eQTL summary statistics from GTEX v8 for eQTL tissue. To link the coloc2 and eQTL tissues to phecodes, we used LD score regression applied to specifically expressed genes (LDSC-SEG)<sup>13</sup>, to identify phenotypic relevant tissues. This was applied for 54 tissues from GTEX V8 using GWAS summary statistics for 776 traits from the Neale GWAS resource and 1,112 traits from the Saige GWAS resource.</p>
 
 <h3>Tissue specificity </h3>
               
-<p><b>Tissue specificity of gene expression:</b>Tissue specific genes were defined using two sources: TPM, a measure of gene expression per tissue<sup>14</sup>, and Tau, a gene tissue specificity metric<sup>15</sup>. We dichotomized levels of TPM and used a threshold > 0.5 to indicate the presence of gene expression and used a threshold of > 0.8 to dichotomize Tau and indicate tissue specificity<sup>15</sup>. Median TPM values for each gene across all tissue samples and gene counts were obtained from GTEX V8.</p>
+<p><b>Tissue specificity of gene expression:</b> Tissue specific genes were defined using two sources: TPM, a measure of gene expression per tissue<sup>14</sup>, and Tau, a gene tissue specificity metric<sup>15</sup>. We dichotomized levels of TPM and used a threshold > 0.5 to indicate the presence of gene expression and used a threshold of > 0.8 to dichotomize Tau and indicate tissue specificity<sup>15</sup>. Median TPM values for each gene across all tissue samples and gene counts were obtained from GTEX V8.</p>
 
 <h3>Constraint</h3>
               
-<p><b>OE:</b>Gene constraint was measured by the OE (observed/expected) score using the suggested cutoff of < 0.35 of the upper bound of the OE confidence interval<sup>16</sup>.</p>
+<p><b>OE:</b> Gene constraint was measured by the OE (observed/expected) score using the suggested cutoff of < 0.35 of the upper bound of the OE confidence interval<sup>16</sup>.</p>
  
 
 <h2>Citation</h2>
