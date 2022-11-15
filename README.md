@@ -7,7 +7,7 @@
 
 <p>For further details about the methods and analysis behind this study, please see our paper: Duffy, A et al. Development of a human genetics-guided priority score for 19,365 genes and 348 drug indications. Submitted. </p>
    
-<p>The Genetic Priority Score R shiny app is accessible at : hhttps://rstudio-connect.hpc.mssm.edu/geneticpriorityscore/ </p>
+<p>The Genetic Priority Score R shiny app is accessible at : https://rstudio-connect.hpc.mssm.edu/geneticpriorityscore/ </p>
 
 
  <h2>Instructions</h2>
