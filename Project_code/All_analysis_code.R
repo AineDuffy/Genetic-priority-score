@@ -1,3 +1,6 @@
+Example code for the main analyses described in Duffy et al. (Development of a human genetics-guided priority score for 19,365 genes and 347 drug indications). 2023.
+							      
+
 library(dplyr)
 library(data.table)
 library(stringr)
@@ -6,14 +9,20 @@ library(caret)
 library(parallel)
 library(logistf)
 
-
+							      
+#mi - binary variable used in dataset for drug indication presence.  
+#genetic features used which comprise the GPS
+geneticpredictors=c('phenotype_Pheno_eva', 'phenotype_Pheno_hgmd', 'phenotype_omim', 'phenotype_Pheno_genebass', 'phenotype_coloc','phenotype_eqtl_Pheno','phenotype_OTG_lessL2G', 'phenotype_coloc_tissue', 'phenotype_eqtl_tissue' , 'genescores_Tissuespecific_PT_V80.01', 'genescores_oe_dichotomized')
+#phecode categories used as covariates in regression models
+covariates=c('categorycongenital_anomalies','categorydermatologic','categorydigestive','categoryendocrine_metabolic','categorygenitourinary','categoryhematopoietic','categorymental_disorders','categorymusculoskeletal','categoryneurological','categoryrespiratory','categorysense_organs','categorysymptoms')
+							      
 # Analysis 1: Get weights for each of the 5 CV Open target datasets 
 
 Firthreg_weights<-mclapply(c(paste0('CVsample',rep(1:5))), function(CVsample){
   OT_dataset=fread(paste0('OT_drugdataset_80_CV', CVsample, '.txt'),data.table=F) #80% training Open target dataset 
-  #genetic features + covariates
-  Predictors=c('phenotype_omim+phenotype_coloc+phenotype_eqtl_Pheno+phenotype_eqtl_tissue+phenotype_coloc_tissue+phenotype_Pheno_hgmd+phenotype_Pheno_genebass+phenotype_Pheno_eva+phenotype_OTG_lessL2G+genescores_Tissuespecific_PT_V80.01+genescores_oe_dichotomized+categorycongenital_anomalies+categorydermatologic+categorydigestive+categoryendocrine_metabolic+categorygenitourinary+categoryhematopoietic+categorymental_disorders+categorymusculoskeletal+categoryneurological+categoryrespiratory+categorysense_organs+categorysymptoms')
-  ##Run firth regression across each CV training dataset to get weights
+  #genetic features + phecode category covariates
+  Predictors=paste(paste(geneticpredictors,collapse='+'), paste(covariates,collapse='+'),collapse='+')
+   ##Run firth regression across each CV training dataset to get weights
   firth_mod <- try(logistf(as.formula(paste0('mi ~ ',Predictors)), data=OT_dataset, firth = TRUE))
   results <- cbind(beta=coef(firth_mod)[-1],lowerCI= firth_mod$ci.lower[-1], upperCI=firth_mod$ci.upper[-1],  P.val =firth_mod$prob[-1])
   write.table(results, paste0('Firth_weights_Opentargets_',CVsample,'.txt'), sep='\t',quote=F)
@@ -178,7 +187,7 @@ Simulate_MI_prioritization1<-do.call(rbind,Simulate_MI_prioritization)
 write.table(Simulate_MI_prioritization1, paste0('Simulation_highgps_matchgenes_mi_sider.txt'),sep='\t', quote=F, row.names=F)
 
 #Analysis 8 - (data for supplementary fig 6a) - Stratify by clinical phase and run a logistic regression model with the GPS score as the predictor for each phase
-
+#maxPhaseForIndication - clinical phase variable
 opentargets_allgenescore=fread('All_genescoresum_opentargets.txt.gz',data.table=F) 
 OT_dataset_full=fread(paste0('OT_drugdataset.txt'),data.table=F)
 opentargets_allgenescore_clinicalphase=inner_join(OT_dataset_full,opentargets_allgenescore )
@@ -246,14 +255,13 @@ write.table(phasecounts1,paste0('Fold_enrichment_phasescomparedtophase1.txt'),se
 #Analysis 10 - (data for supplementary table 4) 
 
 OT_dataset_full=fread(paste0('OT_drugdataset.txt'),data.table=F)#full open targets dataset with clinical trial phase
-predictors=OT_dataset_full %>% select(phenotype_Pheno_eva, phenotype_Pheno_hgmd, phenotype_omim, phenotype_Pheno_genebass, phenotype_coloc,phenotype_eqtl_Pheno,phenotype_OTG_lessL2G, phenotype_coloc_tissue, phenotype_eqtl_tissue , genescores_Tissuespecific_PT_V80.01, genescores_oe_dichotomized)
 ### regression model
 getModelMI <- function(predictor,data){
     model <-glm(as.formula(paste0('mi ~', paste(predictor, categories,sep = " + "))), data=data,family = 'binomial')
 	  return(rbind(summary(model)$coefficient[predictor, c(1, 2, 4)]))
   }
 #loop through each predictor, shuffle MI, apply model
-phenotypes_model<- do.call(rbind,lapply(c(names(predictors)), function(predictor) {
+phenotypes_model<- do.call(rbind,lapply(geneticpredictors, function(predictor) {
   OT_dataset_predictor=OT_dataset_full[,grepl(paste0('drugname|\\bgene\\b|category|\\mi\\b|parentterm|',predictor), colnames(OT_dataset_full))]
   OT_dataset_predictor$category=as.character(OT_dataset_predictor$category)
 
