@@ -19,7 +19,6 @@ Firthreg_weights<-mclapply(c(paste0('CVsample',rep(1:5))), function(CVsample){
   write.table(results, paste0('Firth_weights_Opentargets_',CVsample,'.txt'), sep='\t',quote=F)
 }, mc.cores=10)
 
-
 #Analysis 2: Use weights from firth and create score using remaining 20% of data for each CV
 
 Genescore_sum<-lapply(c(paste0('CVsample',rep(1:5))), function(CVsample){
@@ -58,6 +57,7 @@ max_filetype<-max_filetype[order(max_filetype$OR, decreasing=T),]
 OT_CV=as.character(max_filetype$CV[1])
 
 #Analysis 4: Combine 5-CV 20% datasets to create one dataset
+
 #scores with predictors 
 Combine_genescores<-lapply(paste0('CVsample', seq(1:5)), function(CVsample){
   OT_dataset_20=fread(paste0('OT_drugdataset_20_CV', CVsample, '.txt'),data.table=F)
@@ -105,7 +105,6 @@ Genescore_sum<-lapply(c('Sider','Allgenes'), function(valdataset){
   write.table(genescorefile_drugs, paste0('All_genescoresum_across_drugs_',valdataset,'.txt'), sep='\t', row.names=F, quote=F )
   }
 })
-
 
 ### Analysis 6 - (data for fig 4 and supplementary fig 5) Sliding window analysis - GPS percentile logistic regression for Opentarget and Sider datasets
 
