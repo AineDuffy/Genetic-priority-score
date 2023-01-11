@@ -1,6 +1,5 @@
-Example code for the main analyses described in Duffy et al. (Development of a human genetics-guided priority score for 19,365 genes and 347 drug indications). 2023.
+#Example code for the main analyses described in Duffy et al. (Development of a human genetics-guided priority score for 19,365 genes and 347 drug indications). 2023.
 							      
-
 library(dplyr)
 library(data.table)
 library(stringr)
@@ -8,7 +7,6 @@ library(tidyr)
 library(caret)
 library(parallel)
 library(logistf)
-
 							      
 #mi - binary variable used in dataset for drug indication presence.  
 #genetic features used which comprise the GPS
