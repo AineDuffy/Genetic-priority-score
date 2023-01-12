@@ -13,8 +13,10 @@ library(logistf)
 geneticpredictors=c('phenotype_Pheno_eva', 'phenotype_Pheno_hgmd', 'phenotype_omim', 'phenotype_Pheno_genebass', 'phenotype_coloc','phenotype_eqtl_Pheno','phenotype_OTG_lessL2G', 'phenotype_coloc_tissue', 'phenotype_eqtl_tissue' , 'genescores_Tissuespecific_PT_V80.01', 'genescores_oe_dichotomized')
 #phecode categories used as covariates in regression models
 covariates=c('categorycongenital_anomalies','categorydermatologic','categorydigestive','categoryendocrine_metabolic','categorygenitourinary','categoryhematopoietic','categorymental_disorders','categorymusculoskeletal','categoryneurological','categoryrespiratory','categorysense_organs','categorysymptoms')
-							      
-# Analysis 1: Get weights for each of the 5 CV Open target datasets 
+
+# Analysis 1-5: Code required to run five-fold cross-validation (CV) model to construct the genetic priority score (GPS) using the Open Targets dataset and then applied to Sider and the all genes dataset (19,365 genes and 348 drug indications).
+
+# Analysis 1: Get weights for each of the 5-CV Open target datasets 
 
 Firthreg_weights<-mclapply(c(paste0('CVsample',rep(1:5))), function(CVsample){
   OT_dataset=fread(paste0('OT_drugdataset_80_CV', CVsample, '.txt'),data.table=F) #80% training Open target dataset 
@@ -26,7 +28,7 @@ Firthreg_weights<-mclapply(c(paste0('CVsample',rep(1:5))), function(CVsample){
   write.table(results, paste0('Firth_weights_Opentargets_',CVsample,'.txt'), sep='\t',quote=F)
 }, mc.cores=10)
 
-#Analysis 2: Use weights from firth and create score using remaining 20% of data for each CV
+#Analysis 2: Use weights from Firth and create score using remaining 20% of data for each CV
 
 Genescore_sum<-lapply(c(paste0('CVsample',rep(1:5))), function(CVsample){
 
