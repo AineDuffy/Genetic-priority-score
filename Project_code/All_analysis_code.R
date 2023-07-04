@@ -11,6 +11,7 @@ library(logistf)
 #mi - binary variable used in dataset for drug indication presence.  
 #genetic features used which comprise the GPS
 geneticpredictors=c('clinvar', 'hgmd', 'omim','geneburden', 'singlevariant','eqtl_phenotype','locus2gene','pqtl_phenotype')
+#genetic features used which comprise the GPS-direction of effect
 geneticpredictors_doe=c('clinvar_doe', 'hgmd_doe', 'omim_doe','geneburden_doe', 'singlevariant_doe','eqtl_phenotype_doe','locus2gene_doe','pqtl_phenotype_doe')
 
 #phecode categories used as covariates in regression models
