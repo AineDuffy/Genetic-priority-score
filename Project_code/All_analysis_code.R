@@ -200,7 +200,7 @@ Combine_genescores_nopredictors_doe<-lapply(paste0('CVsample', seq(1:5)), functi
 Combine_genescores_nopredictors_doe1<-do.call(rbind.fill,Combine_genescores_nopredictors_doe)
 write.table(Combine_genescores_nopredictors_doe1, gzfile(paste0('All_genescoresum_opentargets_doe.txt.gz')), sep='\t',quote=F,row.names=F)
 
-#Analysis 2e - Calculate GPS-D in Sider dataset and all genes dataset using the OT firth weights from Analysis 2c which gave the max OR 
+#Analysis 2e: Calculate GPS-D in Sider dataset and all genes dataset using the OT firth weights from Analysis 2c which gave the max OR 
 
 samplecv=OT_CV_doe
 Firth_doe<-fread(paste0('Firth_weights_Opentargets_',samplecv,'_doe.txt'),data.table=F)
@@ -228,7 +228,7 @@ Genescore_sum<-lapply(c('Sider','Allgenes'), function(valdataset){
   }
 })
 
-### Analysis 3 - (data for fig 4 and supplementary fig 5) Binned association analysis - GPS at 0.3 increments, logistic regression for Opentarget and Sider datasets
+### Analysis 3: (data for fig 4 and supplementary fig 5) Binned association analysis - GPS at 0.3 increments, logistic regression for Opentarget and Sider datasets
 
 lapply(c('Opentargets','Sider'), function(datafile){
 
@@ -250,7 +250,7 @@ lapply(c('Opentargets','Sider'), function(datafile){
     write.table(binned_gps, paste0('Binned_by_sum_binsize0.3_',datafile,'.txt'),sep='\t', quote=F, row.names=F)
 })
 
-### Analysis 4 - (data for fig 4 and supplementary fig 5) Binned association analysis Doe- GPS at 0.3 increments, logistic regression for Opentarget and Sider datasets
+### Analysis 4: (data for fig 4 and supplementary fig 5) Binned association analysis Doe- GPS at 0.3 increments, logistic regression for Opentarget and Sider datasets
   # absolute value for all GPS-D,+1 values for GPS-LOF and -1 for GPS-GOF 
 
 lapply(c('Opentargets','Sider'), function(datafile){
@@ -284,7 +284,7 @@ lapply(c('Opentargets','Sider'), function(datafile){
     write.table(binned_gpsscore, paste0('Binned_by_sum_binsize0.3_',datafile,'_doe.txt'),sep='\t', quote=F, row.names=F)
 })
 
-#Analysis 5 - (data for fig 5) - Simulation of prioritization experiment, carry out in validation datasetset
+#Analysis 5: (data for fig 5) Simulation of prioritization experiment, carry out in validation datasetset
 set.seed(155)
 genescoredataset=fread('All_genescoresum_across_drugs_Sider.txt', data.table=F)#GPS Sider data 
 Simulate_MI_prioritization<-lapply(c(seq(0,2.1,0.3)), function(threshold){
@@ -347,7 +347,7 @@ strat_clinicalphase1<-do.call(rbind,strat_clinicalphase)
 strat_clinicalphase_and_all<-rbind(mod_output,strat_clinicalphase1)
 write.table(strat_clinicalphase_and_all, paste0('Stratified_clinicalphase_genescoresumregression.txt'), sep='\t', quote=F, row.names=F)
 
-#Analysis 7 - (data for supplementary fig 6b) - fold enrichment of drug indications with support from a high genetic priority score (0.9,1.5, 2.1) compared to those without in each clinical phase divided by the total sum observed in phase I.
+#Analysis 7: (data for supplementary fig 6b) - fold enrichment of drug indications with support from a high genetic priority score (0.9,1.5, 2.1) compared to those without in each clinical phase divided by the total sum observed in phase I.
 
 genescoredataset=fread('All_genescoresum_opentargets.txt', data.table=F) #GPS OT data 
 OT_dataset_full=fread(paste0('OT_drugdataset.txt'),data.table=F)
@@ -389,8 +389,7 @@ phasecounts<-apply(tablecounts,1,function(cutoff){
 
 write.table(phasedatacounts_cutoff,paste0('Fold_enrichment_phasescomparedtophase0.txt'),sep='\t', quote=F, row.names=F)
 
-#Analysis 8 - (data for supplementary table 4) 
-##Permute (randomly shuffle) the drug indication variable, carry out a logistic regression model for each genetic feature in the Open Target dataset
+#Analysis 8: (data for supplementary table 4) - Permute (randomly shuffle) the drug indication variable, carry out a logistic regression model for each genetic feature in the Open Target dataset
 
 OT_dataset_full=fread(paste0('OT_drugdataset.txt'),data.table=F)#full open targets dataset with clinical trial phase
 ### regression model
@@ -421,8 +420,7 @@ phenotypes_model<- do.call(rbind,lapply(geneticpredictors, function(predictor) {
 }))
 write.table(phenotypes_model, paste0('Univar_regression_opentargets_all_predictors_random_shuffleoutcome_10000_permutations.txt'), sep='\t', row.names=F, quote=F )
 
-#Analysis 9 - (data for supplementary table X) 
-## Permute a percentage of each predictor to 0 to evaluate impact of false negatives on the GPS
+#Analysis 9: (data for supplementary table X) - Permute a percentage of each predictor to 0 to evaluate impact of false negatives on the GPS
 
 set.seed(125)
 False_negative<-lapply(c(0,1,2,5,10,20,30), function(percent_sample){
