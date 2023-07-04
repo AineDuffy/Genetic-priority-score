@@ -13,7 +13,6 @@ library(logistf)
 geneticpredictors=c('clinvar', 'hgmd', 'omim','geneburden', 'singlevariant','eqtl_phenotype','locus2gene','pqtl_phenotype')
 #genetic features used which comprise the GPS-direction of effect
 geneticpredictors_doe=c('clinvar_doe', 'hgmd_doe', 'omim_doe','geneburden_doe', 'singlevariant_doe','eqtl_phenotype_doe','locus2gene_doe','pqtl_phenotype_doe')
-
 #phecode categories used as covariates in regression models
 covariates=c('categorycongenital_anomalies','categorydermatologic','categorydigestive','categoryendocrine_metabolic','categorygenitourinary','categoryhematopoietic','categorymental_disorders','categorymusculoskeletal','categoryneurological','categoryrespiratory','categorysense_organs','categorysymptoms')
 covariates=c('number_gene_targets','oe_dichotomized', covariates)
@@ -58,7 +57,7 @@ max_filetype<-do.call(rbind,lapply(c(paste0('CVsample',seq(1:5))), function(samp
   OT_dataset_20=fread(paste0('OT_drugdataset_20_CV', CVsample, '.txt'),data.table=F)
   genescorefile=fread(paste0('Genescore_sum_across_predictor_Opentargets_',CVsample,'.txt'), data.table=F)
   # combine genescore sum file with drug and mi data for each test set 
-  Dataset_genescores=merge(OT_dataset_20[c('drugname','gene','parentterm','category','mi')] ,genescorefile, by=c('gene', 'parentterm') )
+  Dataset_genescores=merge(OT_dataset_20[c('drugname','gene','number_gene_targets','parentterm','category','mi')] ,genescorefile, by=c('gene', 'parentterm') )
   #run logistic model 
   model1 =glm(as.formula(paste0('mi ~ genescoresum + category + number_gene_targets')), data=Dataset_genescores,family = 'binomial')
   mod_output<-rbind(cbind.data.frame(CV=samplecv,OR=exp(summary(model2)$coefficient[2,1]),lowerCI=exp(summary(model2)$coefficient[2,1]-(1.96* summary(model2)$coefficient[2,2])),upperCI=exp(summary(model2)$coefficient[2,1]+(1.96* summary(model2)$coefficient[2,2])),P.val=summary(model2)$coefficient[2,4]))
