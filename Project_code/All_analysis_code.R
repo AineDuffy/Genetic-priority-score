@@ -93,7 +93,7 @@ Combine_genescores_nopredictors<-lapply(paste0('CVsample', seq(1:5)), function(C
 Combine_genescores_nopredictors1<-do.call(rbind.fill,Combine_genescores_nopredictors)
 write.table(Combine_genescores_nopredictors1, gzfile(paste0('All_genescoresum_opentargets.txt.gz')), sep='\t',quote=F,row.names=F)
 
-# Analysis 1e: Calculate GPS in Sider dataset and all genes dataset using the OT firth weights from Analysis 3 which gave the max OR 
+#Analysis 1e: Calculate GPS in Sider dataset and all genes dataset using the OT firth weights from Analysis 1c which gave the max OR 
 
 samplecv=OT_CV
 Firth<-fread(paste0('Firth_weights_Opentargets_',samplecv,'.txt'),data.table=F)
@@ -118,10 +118,10 @@ Genescore_sum<-lapply(c('Sider','Allgenes'), function(valdataset){
   }
 })
 
-# Analysis 2a-2e: Create GPS-D 
-#GOF annotated as -1, LOF annotated as +1 and missing/no evidence/neutral annotated as 0
+#Analysis 2a-2e: Create GPS-D 
+###GOF annotated as -1, LOF annotated as +1 and missing/no evidence/neutral annotated as 0
 
-# Analysis 2a: Get weights for each of the 5-CV Open target datasets 
+#Analysis 2a: Get weights for each of the 5-CV Open target datasets 
 Firthreg_weights_doe<-mclapply(c(paste0('CVsample',rep(1:5))), function(CVsample){
 
   OT_dataset_doe=fread(paste0('OT_drugdataset_80_CV', CVsample, '_doe.txt'),data.table=F) #80% training Open target dataset 
@@ -164,7 +164,7 @@ max_filetype_doe<-do.call(rbind,lapply(c(paste0('CVsample',seq(1:5))), function(
   OT_dataset_20=fread(paste0('OT_drugdataset_20_CV', CVsample, '_doe.txt'),data.table=F)
   genescorefile=fread(paste0('Genescore_sum_across_predictor_Opentargets_',CVsample,'_doe.txt'), data.table=F)
   # combine genescore sum file with drug and mi data for each test set 
-  Dataset_genescores=merge(OT_dataset_20[c('drugname','gene','parentterm','category','mi')] ,genescorefile, by=c('gene', 'parentterm') )
+  Dataset_genescores=merge(OT_dataset_20[c('drugname','gene','number_gene_targets','parentterm','category','mi')] ,genescorefile, by=c('gene', 'parentterm') )
   #run logistic model 
   model1 =glm(as.formula(paste0('mi ~ abs(genescoresum) + category + number_gene_targets')), data=Dataset_genescores,family = 'binomial')
   mod_output<-rbind(cbind.data.frame(CV=samplecv,OR=exp(summary(model2)$coefficient[2,1]),lowerCI=exp(summary(model2)$coefficient[2,1]-(1.96* summary(model2)$coefficient[2,2])),upperCI=exp(summary(model2)$coefficient[2,1]+(1.96* summary(model2)$coefficient[2,2])),P.val=summary(model2)$coefficient[2,4]))
@@ -200,7 +200,7 @@ Combine_genescores_nopredictors_doe<-lapply(paste0('CVsample', seq(1:5)), functi
 Combine_genescores_nopredictors_doe1<-do.call(rbind.fill,Combine_genescores_nopredictors_doe)
 write.table(Combine_genescores_nopredictors_doe1, gzfile(paste0('All_genescoresum_opentargets_doe.txt.gz')), sep='\t',quote=F,row.names=F)
 
-# Analysis 2e - Calculate GPS in Sider dataset and all genes dataset using the OT firth weights from Analysis 3 which gave the max OR 
+#Analysis 2e - Calculate GPS-D in Sider dataset and all genes dataset using the OT firth weights from Analysis 2c which gave the max OR 
 
 samplecv=OT_CV_doe
 Firth_doe<-fread(paste0('Firth_weights_Opentargets_',samplecv,'_doe.txt'),data.table=F)
@@ -228,7 +228,6 @@ Genescore_sum<-lapply(c('Sider','Allgenes'), function(valdataset){
   }
 })
 
-
 ### Analysis 3 - (data for fig 4 and supplementary fig 5) Binned association analysis - GPS at 0.3 increments, logistic regression for Opentarget and Sider datasets
 
 lapply(c('Opentargets','Sider'), function(datafile){
@@ -252,7 +251,7 @@ lapply(c('Opentargets','Sider'), function(datafile){
 })
 
 ### Analysis 4 - (data for fig 4 and supplementary fig 5) Binned association analysis Doe- GPS at 0.3 increments, logistic regression for Opentarget and Sider datasets
-  # absolute value for all gps-d, +1 values for lof scores and -1 for gof 
+  # absolute value for all GPS-D,+1 values for GPS-LOF and -1 for GPS-GOF 
 
 lapply(c('Opentargets','Sider'), function(datafile){
 
@@ -266,20 +265,20 @@ lapply(c('Opentargets','Sider'), function(datafile){
   #order by increasing GPS and add percentile column
   if(score=='all'){
       Dataset_genescores1= genescoredataset %>%mutate(genescoresum=abs(genescoresum)) %>% arrange(genescoresum) %>% mutate(order=c(seq(1:length(genescoresum)))) %>% mutate(percent=order/length(genescoresum) *100)
-      } else if(score=='gof') {
-        genescoredataset$genescoresum_gof= ifelse(genescoredataset$genescoresum >0,  genescoredataset$genescoresum , 0)
-          Dataset_genescores1= genescoredataset%>% select(-genescoresum) %>% rename(genescoresum=genescoresum_gof) %>% arrange(genescoresum) %>% mutate(order=c(seq(1:length(genescoresum)))) %>% mutate(percent=order/length(genescoresum) *100)
+      } else if(score=='lof') {
+        genescoredataset$genescoresum_lof= ifelse(genescoredataset$genescoresum >0,  genescoredataset$genescoresum , 0)
+          Dataset_genescores1= genescoredataset%>% select(-genescoresum) %>% rename(genescoresum=genescoresum_lof) %>% arrange(genescoresum) %>% mutate(order=c(seq(1:length(genescoresum)))) %>% mutate(percent=order/length(genescoresum) *100)
       } else {
-          genescoredataset$genescoresum_lof= ifelse(genescoredataset$genescoresum < 0,  genescoredataset$genescoresum , 0)
-          Dataset_genescores1= genescoredataset%>% select(-genescoresum) %>% rename(genescoresum=genescoresum_lof) %>% mutate(genescoresum=genescoresum*-1) %>% arrange(genescoresum) %>% mutate(order=c(seq(1:length(genescoresum)))) %>% mutate(percent=order/length(genescoresum) *100)
+          genescoredataset$genescoresum_gof= ifelse(genescoredataset$genescoresum < 0,  genescoredataset$genescoresum , 0)
+          Dataset_genescores1= genescoredataset%>% select(-genescoresum) %>% rename(genescoresum=genescoresum_gof) %>% mutate(genescoresum=genescoresum*-1) %>% arrange(genescoresum) %>% mutate(order=c(seq(1:length(genescoresum)))) %>% mutate(percent=order/length(genescoresum) *100)
       }
-  # run logistic model for each 0.3 increment of score against data with GPS =0
+  # run logistic model for each 0.3 increments of score against data with GPS =0
   
   binned_gps<-do.call(rbind,lapply(c(seq(0.3,2.1,0.3)), function(bin) {
     df_filtered=rbind(Dataset_genescores1 %>% filter(genescoresum>=bin ) %>% mutate(bin=1),
         Dataset_genescores1 %>% filter(genescoresum==0 ) %>% mutate(bin=0))
     model1 =glm(as.formula(paste0('mi ~ bin + category + number_gene_targets')), data=df_filtered,family = 'binomial')
-    mod_output<-rbind(cbind.data.frame( genescoresum =bin, Doe=score, Percentile=round(df_filtered$percent[1],2) , genes=length(unique(df_filtered$gene[df_filtered$bin==1])), parentterms=length(unique(df_filtered$parentterm[df_filtered$bin==1])), OR=exp(summary(model1)$coefficient[2,1]),lowerCI=exp(summary(model1)$coefficient[2,1]-(1.96* summary(model1)$coefficient[2,2])),upperCI=exp(summary(model1)$coefficient[2,1]+(1.96* summary(model1)$coefficient[2,2])),P.val=summary(model1)$coefficient[2,4])) 
+    mod_output<-rbind(cbind.data.frame(genescoresum=bin, Doe=score, Percentile=round(df_filtered$percent[1],2), genes=length(unique(df_filtered$gene[df_filtered$bin==1])), parentterms=length(unique(df_filtered$parentterm[df_filtered$bin==1])), OR=exp(summary(model1)$coefficient[2,1]),lowerCI=exp(summary(model1)$coefficient[2,1]-(1.96* summary(model1)$coefficient[2,2])),upperCI=exp(summary(model1)$coefficient[2,1]+(1.96* summary(model1)$coefficient[2,2])),P.val=summary(model1)$coefficient[2,4])) 
     },mc.cores=10))
   }))
     write.table(binned_gpsscore, paste0('Binned_by_sum_binsize0.3_',datafile,'_doe.txt'),sep='\t', quote=F, row.names=F)
@@ -291,7 +290,7 @@ genescoredataset=fread('All_genescoresum_across_drugs_Sider.txt', data.table=F)#
 Simulate_MI_prioritization<-lapply(c(seq(0,2.1,0.3)), function(threshold){
 
  #step 1. Randomly select 1000 gene-phenotypes with a high GPS and get percentage of sampled gene-phenotype pairs with MI
-     Dataset_genescores1_abovepercentilebin=genescoredataset %>% filter(genescoresum>threshold)  # subset of dataset with an GPS > threshold 
+  Dataset_genescores1_abovepercentilebin=genescoredataset %>% filter(genescoresum>threshold)  # subset of dataset with an GPS > threshold 
   gene_pt=Dataset_genescores1_abovepercentilebin %>% distinct(gene,parentterm)  # gene-parentterms with a high GPS score
   Randomgenept=gene_pt[sample(nrow(gene_pt), 1000, replace=TRUE), ] # randomly sample 1000 gene-phenotypes with replacement
   Randomgenept$ID=paste0(Randomgenept$gene,'_',Randomgenept$parentterm)
@@ -391,6 +390,7 @@ phasecounts<-apply(tablecounts,1,function(cutoff){
 write.table(phasedatacounts_cutoff,paste0('Fold_enrichment_phasescomparedtophase0.txt'),sep='\t', quote=F, row.names=F)
 
 #Analysis 8 - (data for supplementary table 4) 
+##Permute (randomly shuffle) the drug indication variable, carry out a logistic regression model for each genetic feature in the Open Target dataset
 
 OT_dataset_full=fread(paste0('OT_drugdataset.txt'),data.table=F)#full open targets dataset with clinical trial phase
 ### regression model
@@ -421,12 +421,10 @@ phenotypes_model<- do.call(rbind,lapply(geneticpredictors, function(predictor) {
 }))
 write.table(phenotypes_model, paste0('Univar_regression_opentargets_all_predictors_random_shuffleoutcome_10000_permutations.txt'), sep='\t', row.names=F, quote=F )
 
-
-### False negative
 #Analysis 9 - (data for supplementary table X) 
-## Permute a percentage of each predictor to 0 to evaluate impact impact of false negatives on the GPS
-set.seed(125)
+## Permute a percentage of each predictor to 0 to evaluate impact of false negatives on the GPS
 
+set.seed(125)
 False_negative<-lapply(c(0,1,2,5,10,20,30), function(percent_sample){
  lapply(c(seq(1,100,1)), function(perm) {
  # leave one out analysis
