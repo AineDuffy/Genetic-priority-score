@@ -13,7 +13,7 @@
  <h2>Instructions</h2>
  
 <p>Users can use this website to explore associations by gene or by phenotype. All associations have evidence from at least one genetic association and this evidence can be refined using the score cutoff slider at 0.3 increment thresholds of the genetic priority score.</p>
-<p>When the Gene tab is selected, users can search the priority scores for their gene of choice in the <b>‘Search Gene Target‘</b> tab. When the phenotype tab is selected, users can select their phenotype of interest from the dropdown <b>‘Select phenotype:’</b>b> dropdown bar. 
+<p>When the Gene tab is selected, users can search the priority scores for their gene of choice in the <b>‘Search Gene Target‘</b> tab. When the phenotype tab is selected, users can select their phenotype of interest from the dropdown <b>‘Select phenotype:’</b> dropdown bar. 
 
 <p>Once a gene or phenotype is searched on the left side panel, this will generate a table of results in the <b>Table</b> tab. Users can click on the <b>Evidence</b>  and the <b>DOE Evidence</b> tab to generate heatmaps of the associations with the genetic predictors on the X-axis and the associated gene/phenotypes on the Y-axis. The <b>Evidence</b> tab generates a heatmap with the genetic evidence for a predictor colored in purple and the user can hover over the cell to get the phenotype description from the phenotype data source. The <b>DOE Evidence</b> tab generates a heatmap with genetic evidence predicted as loss-of-function (LOF) colored in pink and predictions of gain-of-function (GOF) colored in blue. For genes/phenotypes with more than 100 rows of evidence, only the top 100 high-scored genes/phenotypes are shown.</p>
 
