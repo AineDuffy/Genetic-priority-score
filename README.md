@@ -28,7 +28,7 @@
     
 <p><b>HGMD:</b> Disease-causing and likely disease-causing genes for human inherited diseases from the human mutation database (HGMD)<sup>5</sup>.</p>
 
-<p><b>EVA-ClinVar:</b> Clinically relevant genetic variants and diseases from ClinVar<sup>6</sup>. This evidence is obtained from the Open Target platform and was curated by European Variation Archive (EVA)<sup>7</sup>. ClinVar evidence was filtered on clinical significance: likely pathogenic', 'association', 'confers sensitivity', 'drug response', 'protective', and 'pathogenic' and the confidence of the submission was filtered on: 'criteria provided, single submitter', 'criteria provided, conflicting interpretations', 'criteria provided, multiple submitters, no conflicts', 'reviewed by expert panel', and 'practice guideline'.</p>
+<p><b>EVA-ClinVar:</b> Clinically relevant genetic variants and diseases from ClinVar<sup>6</sup>. This evidence is obtained from the Open Target platform and was curated by European Variation Archive (EVA)<sup>7</sup>. ClinVar evidence was filtered on clinical significance: 'likely pathogenic', 'association', 'confers sensitivity', 'drug response', 'protective', and 'pathogenic' and the confidence of the submission was filtered on: 'criteria provided, single submitter', 'criteria provided, conflicting interpretations', 'criteria provided, multiple submitters, no conflicts', 'reviewed by expert panel', and 'practice guideline'.</p>
 
 <h3>Coding variants</h3>
               
