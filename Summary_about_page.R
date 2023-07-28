@@ -6,7 +6,7 @@ Aboutinfo_page <- tabPanel(
     wellPanel(
         p(paste("We created an"),HTML(paste0(tags$em("in-silico "))),("genetic priority score that can inform drug target prioritization and validation for"),paste(comma(length(unique(Drugfile$Gene)))), paste("genes and"), paste(length(unique(Drugfile$`Phecode Integer`))), paste("phenotypes. This score is constructed as a weighted sum of the effects of eight phenotypic specific features (described below) on drug indication using Firth logistic regression with five-fold cross-validation and was applied to"), comma(length(unique(allgenes$gene))),("protein-coding genes and"), length(unique(allgenes$parentterm)), ("phenotypes. We further incorporated the direction of genetic effect for each predictor using predictions of loss-of-function (LOF) and gain-of-function (GOF) from LoGoFunc"),HTML(paste0(tags$sup("1"))),span("for clinical variants and quantitative trait loci estimates for genome-wide association studies (GWAS) phenotypes and created a complementary genetic priority score with the direction of effect (GPS-D). In our study, we discovered that drugs with a high priority score are much more likely to progress through clinical trials and we recommend using a score cut-off > 1.5 that corresponds to an odds ratio (OR) >=9 of being a therapeutic target when compared to drugs with no genetic evidence.")),
         p(paste0("This web application can be used to search for putative therapeutic targets with genetic priority scores and evidence for direction of genetic effect. We included drug indication data from the Open Targets Platform"),HTML(paste0(tags$sup("2"))), ( "and the Side effect Resource (SIDER) 4.1"),HTML(paste0(tags$sup("3"))) ,(" and mapped all drug indications and genetic phenotypes to phecode integer terms. We have provided evidence of each genetic association and predicted direction of genetic effect and users can search this website by a gene target or phenotype of interest. We note that these results should be a starting point for users to conduct follow-up analyses and if a gene and phenotype are not present in this table, this should not be interpreted as a drug target with genetic support against it.")),
-        p("For further details about the methods and analysis behind this study, please see our paper: Duffy, A et al. Development of a human genetics-guided priority score for 19,365 genes and 347 drug indications. Submitted.")
+        p("For further details about the methods and analysis behind this study, please see our paper: Duffy, A et al. Development of a human genetics-guided priority score for 19,365 genes and 399 drug indications. Submitted.")
     ),
 
     h3("Instructions"),
@@ -23,13 +23,13 @@ Aboutinfo_page <- tabPanel(
     ),
     h3("Genetic Evidence"),
     wellPanel(
-        p(paste0("Using publicly available data sources, we collected eight genetic features from three types of genetic evidence (clinical variants, coding variants and GWAS phenotypes). We mapped these features to phecodes and restricted these to phecode integer terms. Phecodes that mapped to phecode categories ‘neoplasms’, ‘infectious diseases’, ‘pregnancy complications’, ‘injuries and poisonings’ and ‘null’ were excluded from the analysis. Each of these genetic features is described below.")),
+        p(paste0("Using publicly available data sources, we collected eight genetic features from three types of genetic evidence (clinical variants, coding variants and GWAS phenotypes). We mapped these features to phecodes and restricted these to phecode integer terms. Phecodes that mapped to phecode categories: ‘infectious diseases’, ‘pregnancy complications’, ‘injuries and poisonings’ and ‘null’ were excluded from the analysis. Each of these genetic features is described below.")),
         h4("Clinical variants"),
         p(span(strong("OMIM:"), span("Mendelian genes from the Online Mendelian Inheritance in Man (OMIM) database"),HTML(paste0(tags$sup("4"))),span('.'),
         )),
         p(span(strong("HGMD:"), span("Disease-causing and likely disease-causing genes for human inherited diseases from the human mutation database (HGMD) professional"),HTML(paste0(tags$sup("5"))),span('.'),
         )),
-        p(span(strong("EVA-ClinVar:"), span("Clinically relevant genetic variants and diseases from ClinVar"),HTML(paste0(tags$sup("6"))), span(". This evidence is obtained from the Open Target platform and was curated by European Variation Archive (EVA)"),HTML(paste0(tags$sup("7"))), span("ClinVar evidence was filtered on clinical significance: likely pathogenic', 'association', 'confers sensitivity', 'drug response', 'protective' and 'pathogenic' and the confidence of the submission was filtered on: 'criteria provided, single submitter'; 'criteria provided, conflicting interpretations'; 'criteria provided, multiple submitters, no conflicts'; 'reviewed by expert panel' and 'practice guideline'."),
+        p(span(strong("EVA-ClinVar:"), span("Clinically relevant genetic variants and diseases from ClinVar"),HTML(paste0(tags$sup("6"))), span(". This evidence is obtained from the Open Target platform and was curated by European Variation Archive (EVA)"),HTML(paste0(tags$sup("7"))), span("ClinVar evidence was filtered on clinical significance: 'likely pathogenic', 'association', 'confers sensitivity', 'drug response', 'protective' and 'pathogenic' and the confidence of the submission was filtered on: 'criteria provided, single submitter'; 'criteria provided, conflicting interpretations'; 'criteria provided, multiple submitters, no conflicts'; 'reviewed by expert panel' and 'practice guideline'."),
         )),
         h4("Coding variants"),
 
@@ -47,7 +47,7 @@ Aboutinfo_page <- tabPanel(
         ))),
     h3("Citation"),
     wellPanel(
-        p('Duffy, A et al. Development of a human genetics-guided priority score for 19,365 genes and 347 drug indications. Submitted.'),
+        p('Duffy, A et al. Development of a human genetics-guided priority score for 19,365 genes and 399 drug indications. Submitted.'),
     ),
     h3("Contact"),
     wellPanel(
