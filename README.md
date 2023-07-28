@@ -7,7 +7,7 @@
 
 <p>For further details about the methods and analysis behind this study, please see our paper: Duffy, A et al. Development of a human genetics-guided priority score for 19,365 genes and 399 drug indications. Submitted. </p>
    
-<p>The Genetic Priority Score R shiny app is accessible at : https://rstudio-connect.hpc.mssm.edu/geneticpriorityscore/ </p>
+<p>The Genetic Priority Score R shiny app is accessible at: https://rstudio-connect.hpc.mssm.edu/geneticpriorityscore/ </p>
 
 
  <h2>Instructions</h2>
@@ -19,7 +19,7 @@
 
 <h2>Genetic Evidence</h2>
     
-<p>Using publicly available data sources, we collected eight genetic features from three types of genetic evidence (clinical variants, coding variants and GWAS phenotypes). We mapped these features to phecodes and restricted these to phecode integer terms. Phecodes that mapped to phecode categories ‘infectious diseases’, ‘pregnancy complications’, ‘injuries and poisonings’ and ‘null’ were excluded from the analysis. Each of these genetic features is described below.</p>
+<p>Using publicly available data sources, we collected eight genetic features from three types of genetic evidence (clinical variants, coding variants and GWAS phenotypes). We mapped these features to phecodes and restricted these to phecode integer terms. Phecodes that mapped to phecode categories: ‘infectious diseases’, ‘pregnancy complications’, ‘injuries and poisonings’ and ‘null’ were excluded from the analysis. Each of these genetic features is described below.</p>
 
 <h3>Clinical variants </h3>
               
