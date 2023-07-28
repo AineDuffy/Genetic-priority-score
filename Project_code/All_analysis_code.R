@@ -14,7 +14,7 @@ geneticpredictors=c('clinvar', 'hgmd', 'omim','geneburden', 'singlevariant','eqt
 #genetic features used which comprise the GPS-direction of effect
 geneticpredictors_doe=c('clinvar_doe', 'hgmd_doe', 'omim_doe','geneburden_doe', 'singlevariant_doe','eqtl_phenotype_doe','locus2gene_doe','pqtl_phenotype_doe')
 #phecode categories used as covariates in regression models
-covariates=c('categorycongenital_anomalies','categorydermatologic','categorydigestive','categoryendocrine_metabolic','categorygenitourinary','categoryhematopoietic','categorymental_disorders','categorymusculoskeletal','categoryneurological','categoryrespiratory','categorysense_organs','categorysymptoms')
+covariates=c('categorycongenital_anomalies','categorydermatologic','categorydigestive','categoryendocrine_metabolic','categorygenitourinary','categoryhematopoietic','categorymental_disorders','categorymusculoskeletal','categoryneoplasm', 'categoryneurological','categoryrespiratory','categorysense_organs','categorysymptoms')
 covariates=c('number_gene_targets','oe_dichotomized', covariates)
 
 # Analysis 1a-1e: Code required to run five-fold cross-validation (CV) model to construct the genetic priority score (GPS) using the Open Targets dataset and then applied to Sider and the all genes dataset (19,365 genes and 348 drug indications).
