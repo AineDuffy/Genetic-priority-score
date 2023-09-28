@@ -1,0 +1,9 @@
+Features	GPS	GPS-DOE
+ClinVar	0.794	0.761
+HGMD	0.880	0.892
+OMIM	0.492	0.501
+Gene Burden	0.971	1.281
+Single Variant	0.625	0.564
+eQTL Phenotype	0.654	0.746
+Locus2gene	1.293	1.341
+pQTL Phenotype	1.177	1.225
