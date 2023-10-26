@@ -1,4 +1,4 @@
-#Example code for the main analyses described in Duffy et al. (Development of a human genetics-guided priority score for 19,365 genes and 347 drug indications). 2023.
+#Example code for the main analyses described in Duffy et al. (Development of a human genetics-guided priority score for 19,365 genes and 399 drug indications). 2023.
 							      
 library(dplyr)
 library(data.table)
@@ -17,7 +17,7 @@ geneticpredictors_doe=c('clinvar_doe', 'hgmd_doe', 'omim_doe','geneburden_doe', 
 covariates=c('categorycongenital_anomalies','categorydermatologic','categorydigestive','categoryendocrine_metabolic','categorygenitourinary','categoryhematopoietic','categorymental_disorders','categorymusculoskeletal','categoryneoplasm', 'categoryneurological','categoryrespiratory','categorysense_organs','categorysymptoms')
 covariates=c('number_gene_targets','oe_dichotomized', covariates)
 
-# Analysis 1a-1e: Code required to run five-fold cross-validation (CV) model to construct the genetic priority score (GPS) using the Open Targets dataset and then applied to Sider and the all genes dataset (19,365 genes and 348 drug indications).
+# Analysis 1a-1e: Code required to run five-fold cross-validation (CV) model to construct the genetic priority score (GPS) using the Open Targets dataset and then applied to Sider and the all genes dataset (19,365 genes and 399 drug indications).
 
 # Analysis 1a: Get weights for each of the 5-CV Open target datasets 
 
@@ -129,8 +129,8 @@ Firthreg_weights_doe<-mclapply(c(paste0('CVsample',rep(1:5))), function(CVsample
   OT_dataset_doe[8:15][OT_dataset_doe[8:15]=='LOF'] <-1
   OT_dataset_doe[8:15][OT_dataset_doe[8:15]=='Neutral'] <-0
  
-  #genetic features + phecode category covariates
-  Predictors_doe=paste(paste(geneticpredictors_doe,collapse='+'), '+', paste(covariates,collapse='+'),collapse='+' )
+  #genetic features + phecode category covariates. Include mechanism_of_action (inhibitor or activator) as a covariate as well. 
+  Predictors_doe=paste(paste(geneticpredictors_doe,collapse='+'), '+', paste(covariates, 'mechanism_of_action',collapse='+'),collapse='+' )
    ##Run firth regression across each CV training dataset to get weights - don't take DOE into account here
   firth_mod <- try(logistf(as.formula(paste0('mi ~ ',Predictors_doe)), data=OT_dataset_doe, firth = TRUE))
   results <- cbind(beta=coef(firth_mod)[-1],lowerCI= firth_mod$ci.lower[-1], upperCI=firth_mod$ci.upper[-1],  P.val =firth_mod$prob[-1])
@@ -420,7 +420,7 @@ phenotypes_model<- do.call(rbind,lapply(geneticpredictors, function(predictor) {
 }))
 write.table(phenotypes_model, paste0('Univar_regression_opentargets_all_predictors_random_shuffleoutcome_10000_permutations.txt'), sep='\t', row.names=F, quote=F )
 
-#Analysis 9: (data for supplementary table X) - Permute a percentage of each predictor to 0 to evaluate impact of false negatives on the GPS
+#Analysis 9: (data for Supplementary Figure 8) - Permute a percentage of each predictor to 0 to evaluate impact of false negatives on the GPS
 
 set.seed(125)
 False_negative<-lapply(c(0,1,2,5,10,20,30), function(percent_sample){
